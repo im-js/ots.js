@@ -1,0 +1,23 @@
+{
+  "name": "ots.js",
+  "version": "0.0.1",
+  "description": "阿里云开放表格存储服务",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/im-js/ots.js.git"
+  },
+  "keywords": [
+    "im.js",
+    "ots"
+  ],
+  "author": " <plusmancn@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/im-js/ots.js/issues"
+  },
+  "homepage": "https://github.com/im-js/ots.js#readme"
+}
