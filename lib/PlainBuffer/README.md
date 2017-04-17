@@ -1,5 +1,5 @@
 ## Tag取值
-```javascript
+```
 tag_header = 0x75 (4byte)
 tag_pk = 0x01 (1byte)
 tag_attr = 0x02 (1byte)
@@ -14,7 +14,7 @@ tag_cell_checksum = 0x0A (1byte)
 ```
 
 ## ValueType
-```javascript
+```
 VT_INTEGER = 0x0
 VT_DOUBLE = 0x1
 VT_BOOLEAN = 0x2
@@ -27,7 +27,7 @@ VT_AUTO_INCREMENT = 0xb
 ```
 
 ## 格式定义
-```javascript
+```
 plainbuffer = tag_header row1  [row2]  [row3]
 row = ( pk [attr] | [pk] attr | pk attr ) [tag_delete_marker] row_checksum;
 pk = tag_pk cell_1 [cell_2] [cell_3]
