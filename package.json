@@ -19,5 +19,12 @@
   "bugs": {
     "url": "https://github.com/im-js/ots.js/issues"
   },
-  "homepage": "https://github.com/im-js/ots.js#readme"
+  "homepage": "https://github.com/im-js/ots.js#readme",
+  "dependencies": {
+    "protobufjs": "~6.7.3",
+    "request": "^2.81.0"
+  },
+  "devDependencies": {
+    "eslint": "^3.19.0"
+  }
 }
