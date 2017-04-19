@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/im-js/ots.js#readme",
   "dependencies": {
+    "long": "^3.2.0",
     "protobufjs": "~6.7.3",
     "request": "^2.81.0"
   },

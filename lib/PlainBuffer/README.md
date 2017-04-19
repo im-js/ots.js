@@ -15,8 +15,8 @@ tag_cell_checksum = 0x0A (1byte)
 
 ## ValueType
 ```
-VT_INTEGER = 0x0
-VT_DOUBLE = 0x1
+VT_INTEGER = 0x0 (8byte) // 有点坑啊
+VT_DOUBLE = 0x1 (8byte)
 VT_BOOLEAN = 0x2
 VT_STRING = 0x3
 VT_NULL = 0x6
