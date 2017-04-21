@@ -7,6 +7,11 @@ const Cell = require('../lib/PlainBuffer/type/Cell');
 const PlainBuffer = require('../lib/PlainBuffer');
 const should = require('should');
 
+const CONST_VALUE = require('../lib/PlainBuffer/CONST_VALUE');
+const {
+    PB_SYSTEM
+} = CONST_VALUE;
+
 describe('#PlainBuffer', function() {
     describe('#buildPrimayKey', function() {
         it('input: pk, pkValue', function () {
@@ -15,6 +20,39 @@ describe('#PlainBuffer', function() {
             });
             should.equal(result.toString('hex'), '7500000001030402000000706b050c0000000307000000706b56616c75650a8509f7');
         });
+    });
+
+    describe('#getCellValueBuf', function() {
+        it('type symbol input OTS_INF_MAX', function() {
+            let buf = Cell.getCellValueBuf(PB_SYSTEM.OTS_INF_MAX);
+            should.equal(buf.toString('hex'), '0a');
+        });
+
+        it('type symbol input OTS_INF_MIN', function() {
+            let buf = Cell.getCellValueBuf(PB_SYSTEM.OTS_INF_MIN);
+            should.equal(buf.toString('hex'), '09');
+        });
+
+        it('type number input 21', function() {
+            let buf = Cell.getCellValueBuf(21);
+            should.equal(buf.toString('hex'), '001500000000000000');
+        });
+
+        it('type string hello', function() {
+            let buf = Cell.getCellValueBuf('hello');
+            should.equal(buf.toString('hex'), '030500000068656c6c6f');
+        });
+
+        it('type boolean false', function() {
+            let buf = Cell.getCellValueBuf(false);
+            should.equal(buf.toString('hex'), '0200');
+        });
+
+        it('type boolean true', function() {
+            let buf = Cell.getCellValueBuf(true);
+            should.equal(buf.toString('hex'), '0201');
+        });
+
     });
 
     describe('#long', function () {

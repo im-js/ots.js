@@ -96,6 +96,31 @@ describe('#api', function () {
     });
 
     describe('#GetRange', function() {
+        it('GetRange with filter', function (done) {
+            ots.GetRange('sampleTable', {
+                inclusiveStartPrimaryKey: {
+                    pk: 'a'
+                },
+                exclusiveEndPrimaryKey: {
+                    pk: ots.INF_MAX
+                },
+                filter: {
+                    type: 'FT_SINGLE_COLUMN_VALUE',
+                    filter:  {
+                        comparator: 'CT_GREATER_THAN',
+                        columnName: 'Col0',
+                        columnValue: 21,
+                        filterIfMissing: false,
+                        latestVersionOnly: true
+                    }
+                }
+            }, function(err, result) {
+                should.ifError(err);
+                should.equal(result.rowsDecode[0].pk.pk, 'testKey');
+                done();
+            });
+        });
+
         it('GetRange order z->a', function(done) {
             ots.GetRange('sampleTable', {
                 inclusiveStartPrimaryKey: {

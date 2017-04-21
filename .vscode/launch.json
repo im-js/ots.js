@@ -16,7 +16,8 @@
                 "999999",
                 "--colors",
                 "${workspaceRoot}/test"
-                // "--grep=#PlainBuffer"
+                // , "--grep=#PlainBuffer"
+                // ,"--grep=#filterMaker"
             ],
             "internalConsoleOptions": "openOnSessionStart"
         },
