@@ -1,6 +1,6 @@
 'use strict';
 /**
- * API 测试
+ * API CURD 测试
  */
 const should = require('should');
 const OTS = require('../');
