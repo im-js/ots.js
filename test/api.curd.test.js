@@ -332,7 +332,7 @@ describe('#api', function () {
     });
 
     describe('#BatchWriteRow', function() {
-        it('PUT', function(done) {
+        it('mix PUT, UPDATE, DELETE operation', function(done) {
             ots.BatchWriteRow({
                 tables: [
                     {
