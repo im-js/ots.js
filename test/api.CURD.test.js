@@ -96,7 +96,32 @@ describe('#api', function () {
     });
 
     describe('#GetRange', function() {
-        it('GetRange with filter', function (done) {
+        // it('GetRange with SingleColumnValueFilter Col0 > 21', function (done) {
+        //     ots.GetRange('sampleTable', {
+        //         inclusiveStartPrimaryKey: {
+        //             pk: 'a'
+        //         },
+        //         exclusiveEndPrimaryKey: {
+        //             pk: ots.INF_MAX
+        //         },
+        //         filter: {
+        //             type: 'FT_SINGLE_COLUMN_VALUE',
+        //             filter:  {
+        //                 comparator: 'CT_GREATER_THAN',
+        //                 columnName: 'Col0',
+        //                 columnValue: 21,
+        //                 filterIfMissing: false,
+        //                 latestVersionOnly: true
+        //             }
+        //         }
+        //     }, function(err, result) {
+        //         should.ifError(err);
+        //         should.equal(result.rowsDecode[0].pk.pk, 'testKey');
+        //         done();
+        //     });
+        // });
+
+        it('GetRange with CompositeColumnValueFilter', function (done) {
             ots.GetRange('sampleTable', {
                 inclusiveStartPrimaryKey: {
                     pk: 'a'
@@ -105,17 +130,36 @@ describe('#api', function () {
                     pk: ots.INF_MAX
                 },
                 filter: {
-                    type: 'FT_SINGLE_COLUMN_VALUE',
-                    filter:  {
-                        comparator: 'CT_GREATER_THAN',
-                        columnName: 'Col0',
-                        columnValue: 21,
-                        filterIfMissing: false,
-                        latestVersionOnly: true
+                    type: 'FT_COMPOSITE_COLUMN_VALUE',
+                    filter: {
+                        combinator: 'LO_AND',
+                        subFilters: [
+                            {
+                                type: 'FT_SINGLE_COLUMN_VALUE',
+                                filter:  {
+                                    comparator: 'CT_GREATER_THAN',
+                                    columnName: 'Col0',
+                                    columnValue: 10,
+                                    filterIfMissing: false,
+                                    latestVersionOnly: true
+                                }
+                            },
+                            {
+                                type: 'FT_SINGLE_COLUMN_VALUE',
+                                filter:  {
+                                    comparator: 'CT_EQUAL',
+                                    columnName: 'Col10',
+                                    columnValue: 'hello ots',
+                                    filterIfMissing: true,
+                                    latestVersionOnly: true
+                                }
+                            }
+                        ]
                     }
                 }
             }, function(err, result) {
                 should.ifError(err);
+                should.equal(result.rowsDecode.length, 1);
                 should.equal(result.rowsDecode[0].pk.pk, 'testKey');
                 done();
             });

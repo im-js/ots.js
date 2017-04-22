@@ -36,24 +36,3 @@ message Filter {
     required FilterType type = 1;
     required bytes filter = 2;  // Serialized string of filter of the type
 }
-
-
-// 手动补充类型定义
-enum ColumnType {
-    INF_MIN = 0;
-    INF_MAX = 1;
-    INTEGER = 2;
-    STRING = 3;
-    BOOLEAN = 4;
-    DOUBLE = 5;
-    BINARY = 6;
-}
-
-message ColumnValue {
-    required ColumnType type = 1;
-    optional int64 v_int = 2;
-    optional string v_string = 3;
-    optional bool v_bool = 4;
-    optional double v_double = 5;
-    optional bytes v_binary = 6;
-}
