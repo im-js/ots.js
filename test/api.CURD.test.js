@@ -305,10 +305,106 @@ describe('#api', function () {
         });
     });
 
+    describe('#BatchGetRow', function() {
+        it('table: smapleTalbe primayKey: pk:pkValue, pk:testKey', function(done) {
+            ots.BatchGetRow({
+                tables: [
+                    {
+                        tableName: 'sampleTable',
+                        maxVersions: 1,
+                        primaryKey: [
+                            {
+                                pk: 'pkValue'
+                            },
+                            {
+                                pk: 'testKey'
+                            }
+                        ]
+                    }
+                ]
+            }, function(err, result) {
+                should.ifError(err);
+                should.equal(result.tables[0].rows[0].rowDecode.pk.pk, 'pkValue');
+                should.equal(result.tables[0].rows[1].rowDecode.pk.pk, 'testKey');
+                done();
+            });
+        });
+    });
+
+    describe('#BatchWriteRow', function() {
+        it('PUT', function(done) {
+            ots.BatchWriteRow({
+                tables: [
+                    {
+                        tableName: 'sampleTable',
+                        rows: [
+                            {
+                                type: 'PUT',
+                                rowChange: {
+                                    pk: {
+                                        pk: 'batchRow'
+                                    },
+                                    attr: {
+                                        way: 'batchWriteRow'
+                                    }
+                                },
+                                condition: {
+                                    rowExistence: 'IGNORE'
+                                }
+                            },
+                            {
+                                type: 'UPDATE',
+                                rowChange: {
+                                    pk: {
+                                        pk: 'pkValue'
+                                    },
+                                    attr: {
+                                        name: 'Gina'
+                                    }
+                                },
+                                condition: {
+                                    rowExistence: 'EXPECT_EXIST'
+                                }
+                            },
+                            {
+                                type: 'DELETE',
+                                rowChange: {
+                                    pk: {
+                                        pk: 'testKey',
+                                    }
+                                },
+                                condition: {
+                                    rowExistence: 'EXPECT_EXIST'
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }, function(err, result) {
+                should.ifError(err);
+                let {
+                    tables: [
+                        {
+                            rows: [
+                                row0,
+                                row1,
+                                row2
+                            ]
+                        }
+                    ]
+                } = result;
+                should.strictEqual(row0.isOk, true);
+                should.strictEqual(row1.isOk, true);
+                should.strictEqual(row2.isOk, true);
+                done();
+            });
+        });
+    });
+
     describe('#DeleteRow', function() {
         it('DeleteRow Row identify by pk with pkValue', function(done) {
             ots.DeleteRow('sampleTable', {
-                pk: 'pkValue'
+                pk: 'batchRow'
             }, null, function(err, result) {
                 should.ifError(err);
                 should.equal(result.consumed.capacityUnit.write, 1, 'capacityUnit.write shoud be 1');
