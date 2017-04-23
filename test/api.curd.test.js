@@ -4,14 +4,9 @@
  */
 const should = require('should');
 const OTS = require('../');
-let ots = new OTS({
-    endPoint: 'http://pl-msgc.cn-hangzhou.ots.aliyuncs.com',
-    accessId: 'LTAI0Ak0Ypf0NE1Z',
-    accessKey: 'Ds8GICLumeuwEL35nuRZtAkMNpmGxS',
-    instanceName: 'pl-msgc'
-});
+const ots = require('./sample/ots');
 
-describe('#api', function () {
+describe('#apiCurd', function () {
     describe('#Symbol', function () {
         it('ensure INF_MAX, INF_MIN symbol Equality', function () {
             should.deepEqual(ots.INF_MAX, OTS.INF_MAX);
