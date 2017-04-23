@@ -4,7 +4,7 @@
   "description": "阿里云开放表格存储服务",
   "main": "./lib/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/.bin/_mocha --timeout=5000"
   },
   "repository": {
     "type": "git",

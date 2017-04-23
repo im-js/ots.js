@@ -7,6 +7,42 @@ const OTS = require('../');
 const ots = require('./sample/ots');
 
 describe('#apiCurd', function () {
+    
+    before(function(done) {
+        ots.CreateTable({
+            tableMeta: {
+                tableName: 'sampleTable',
+                primaryKey: [{
+                    name: 'pk',
+                    type: 'STRING'
+                }]
+            },
+            reservedThroughput: {
+                capacityUnit: {
+                    read: 0,
+                    write: 0
+                }
+            },
+            tableOptions: {
+                timeToLive: -1,
+                maxVersions: 1
+            }
+        }, function(err) {
+            should.ifError(err);
+            // 需要有 1.5 秒延时，因为表创建后，并不能立即生效
+            setTimeout(function () {
+                done();
+            }, 1500);
+        });
+    });
+
+    after(function(done) {
+        ots.DeleteTable('sampleTable', function(err) {
+            should.ifError(err);
+            done();
+        });
+    });
+
     describe('#Symbol', function () {
         it('ensure INF_MAX, INF_MIN symbol Equality', function () {
             should.deepEqual(ots.INF_MAX, OTS.INF_MAX);
