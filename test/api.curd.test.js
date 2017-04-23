@@ -32,7 +32,7 @@ describe('#apiCurd', function () {
             // 需要有 1.5 秒延时，因为表创建后，并不能立即生效
             setTimeout(function () {
                 done();
-            }, 1500);
+            }, 3000);
         });
     });
 
