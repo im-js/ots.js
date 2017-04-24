@@ -1,4 +1,5 @@
 # ots.js
+[![npm version](https://img.shields.io/npm/v/ots.js.svg)](https://www.npmjs.com/package/ots.js)
 [![Travis CI Build Status](https://travis-ci.org/im-js/ots.js.svg?branch=master)](https://travis-ci.org/im-js/ots.js/)
 
 ## Engines
