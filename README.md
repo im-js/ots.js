@@ -6,8 +6,8 @@
 `node >=6.0.0` for es6 support
 
 ## Feature
+* Base on `2015-12-31` API (latest API so far)
 * PlainBuffer Support
-* Base on 2015-12-31 API (latest API so far)
 * AutoIncrement PrimaryKey Support
 
 ## Test

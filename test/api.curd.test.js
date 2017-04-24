@@ -12,10 +12,12 @@ describe('#apiCurd', function () {
         ots.CreateTable({
             tableMeta: {
                 tableName: testTable,
-                primaryKey: [{
-                    name: 'pk',
-                    type: 'STRING'
-                }]
+                primaryKey: [
+                    {
+                        name: 'pk',
+                        type: 'STRING'
+                    }
+                ]
             },
             reservedThroughput: {
                 capacityUnit: {
@@ -53,7 +55,7 @@ describe('#apiCurd', function () {
     describe('#PutRow', function() {
         it('Put row with pk=pkvalue, attr Col0, Col1 With returnType RT_NONE', function(done) {
             ots.PutRow(testTable, {
-                pk: 'pkValue'
+                pk: 'pkValue',
             }, {
                 Col0: 19,
                 Col1: 'test value 中文值2'
