@@ -3,7 +3,6 @@
  * 自增主键测试
  */
 const should = require('should');
-const OTS = require('../');
 const ots = require('./sample/ots');
 
 describe('#autoIncrementPK', function() {
@@ -51,7 +50,7 @@ describe('#autoIncrementPK', function() {
     });
 
     describe('#Increment', function () {
-        it('PutRow ', function(done) {
+        it('PutRow 1', function(done) {
             ots.PutRow(testTable, {
                 pk: 'autoIncr',
                 pkIncr: ots.AUTO_INCREMENT

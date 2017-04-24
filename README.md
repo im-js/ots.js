@@ -25,3 +25,20 @@ npm test
 ```
 
 ## Performance
+PlainBuffer Test Result
+```
+====== PlainBuffer bench START ======
+#encodeString-英文 x 90,286 ops/sec ±2.21% (72 runs sampled)
+  - memory: { rss: 79097856, heapTotal: 43077632, heapUsed: 19759840 }
+#encodeString-中文 x 88,226 ops/sec ±1.23% (77 runs sampled)
+  - memory: { rss: 79884288, heapTotal: 43077632, heapUsed: 14666376 }
+#encodeInteger x 109,069 ops/sec ±1.57% (73 runs sampled)
+  - memory: { rss: 95891456, heapTotal: 57757696, heapUsed: 13551944 }
+#encodeMix x 37,376 ops/sec ±1.33% (75 runs sampled)
+  - memory: { rss: 97460224, heapTotal: 58806272, heapUsed: 22687840 }
+====== PlainBuffer bench END =====
+```
+You can also run the benchmark
+```shell
+npm run bench
+```
