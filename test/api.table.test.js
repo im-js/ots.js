@@ -6,11 +6,12 @@ const should = require('should');
 const ots = require('./sample/ots');
 
 describe('#apiTable', function () {
+    const testTable = `table_${process.version.replace(/\./g, '_')}`;
     describe('#CreateTable', function() {
         it('table1 with pk1:STRING, pk2:INTEGER, pk3:BINARY', function(done) {
             ots.CreateTable({
                 tableMeta: {
-                    tableName: 'table1',
+                    tableName: testTable,
                     primaryKey: [
                         {
                             name: 'pk1',
@@ -56,7 +57,7 @@ describe('#apiTable', function () {
 
     describe('#UpdateTable', function() {
         it('update maxVersion=2', function (done) {
-            ots.UpdateTable('table1', {
+            ots.UpdateTable(testTable, {
                 tableOptions: {
                     maxVersions: 2
                 }
@@ -70,9 +71,9 @@ describe('#apiTable', function () {
 
     describe('#DescribeTable', function() {
         it('describe table1', function(done) {
-            ots.DescribeTable('table1', function(err, result) {
+            ots.DescribeTable(testTable, function(err, result) {
                 should.ifError(err);
-                should.equal(result.tableMeta.tableName, 'table1');
+                should.equal(result.tableMeta.tableName, testTable);
                 done();
             });
         });
@@ -80,7 +81,7 @@ describe('#apiTable', function () {
 
     describe('#DeleteTable', function() {
         it('delete table1', function (done) {
-            ots.DeleteTable('table1', function(err) {
+            ots.DeleteTable(testTable, function(err) {
                 should.ifError(err);
                 done();
             });
