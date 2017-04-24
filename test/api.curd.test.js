@@ -7,11 +7,11 @@ const OTS = require('../');
 const ots = require('./sample/ots');
 
 describe('#apiCurd', function () {
-    
+    const testTable = `sampleTable_${process.version.replace(/\./g, '_')}`;
     before(function(done) {
         ots.CreateTable({
             tableMeta: {
-                tableName: 'sampleTable',
+                tableName: testTable,
                 primaryKey: [{
                     name: 'pk',
                     type: 'STRING'
@@ -29,15 +29,15 @@ describe('#apiCurd', function () {
             }
         }, function(err) {
             should.ifError(err);
-            // 需要有 1.5 秒延时，因为表创建后，并不能立即生效
+            // 需要有 2 秒延时，因为表创建后，并不能立即生效
             setTimeout(function () {
                 done();
-            }, 3000);
+            }, 2e3);
         });
     });
 
     after(function(done) {
-        ots.DeleteTable('sampleTable', function(err) {
+        ots.DeleteTable(testTable, function(err) {
             should.ifError(err);
             done();
         });
@@ -52,7 +52,7 @@ describe('#apiCurd', function () {
     
     describe('#PutRow', function() {
         it('Put row with pk=pkvalue, attr Col0, Col1 With returnType RT_NONE', function(done) {
-            ots.PutRow('sampleTable', {
+            ots.PutRow(testTable, {
                 pk: 'pkValue'
             }, {
                 Col0: 19,
@@ -70,7 +70,7 @@ describe('#apiCurd', function () {
         });
 
         it('Put Row with pk=testKey', function(done) {
-            ots.PutRow('sampleTable', {
+            ots.PutRow(testTable, {
                 pk: 'testKey'
             }, {
                 Col0: 288,
@@ -84,7 +84,7 @@ describe('#apiCurd', function () {
         });
 
         it('PutRow with pk=testKey2', function (done) {
-            ots.PutRow('sampleTable', {
+            ots.PutRow(testTable, {
                 pk: 'testKey2',
             }, {
                 Col0: 290,
@@ -100,7 +100,7 @@ describe('#apiCurd', function () {
 
     describe('#UpdateRow', function() {
         it('Update Row identify by pk with pkValue', function(done) {
-            ots.UpdateRow('sampleTable', {
+            ots.UpdateRow(testTable, {
                 pk: 'pkValue'
             }, {
                 Col0: 20,
@@ -117,7 +117,7 @@ describe('#apiCurd', function () {
 
     describe('#GetRow', function() {
         it('Get Row identify by pk with pkValue', function(done) {
-            ots.GetRow('sampleTable',{
+            ots.GetRow(testTable, {
                 pk: 'pkValue'
             }, {
                 maxVersions: 1
@@ -142,7 +142,7 @@ describe('#apiCurd', function () {
 
     describe('#GetRange', function() {
         it('GetRange with SingleColumnValueFilter Col0 > 21', function (done) {
-            ots.GetRange('sampleTable', {
+            ots.GetRange(testTable, {
                 inclusiveStartPrimaryKey: {
                     pk: 'a'
                 },
@@ -167,7 +167,7 @@ describe('#apiCurd', function () {
         });
 
         it('GetRange with CompositeColumnValueFilter Col > 10 and Col10 = \'hello ots\' ', function (done) {
-            ots.GetRange('sampleTable', {
+            ots.GetRange(testTable, {
                 inclusiveStartPrimaryKey: {
                     pk: 'a'
                 },
@@ -211,7 +211,7 @@ describe('#apiCurd', function () {
         });
 
         it('GetRange with CompositeColumnValueFilter Col > 10 and (Col10 = \'hello ots\' or Col10 = \'Okaha\') ', function (done) {
-            ots.GetRange('sampleTable', {
+            ots.GetRange(testTable, {
                 inclusiveStartPrimaryKey: {
                     pk: 'a'
                 },
@@ -274,7 +274,7 @@ describe('#apiCurd', function () {
         });
 
         it('GetRange with ColumnPaginationFilter offset 1 limit 2', function(done) {
-            ots.GetRange('sampleTable', {
+            ots.GetRange(testTable, {
                 inclusiveStartPrimaryKey: {
                     pk: 'a'
                 },
@@ -303,7 +303,7 @@ describe('#apiCurd', function () {
         });
 
         it('GetRange order z->a', function(done) {
-            ots.GetRange('sampleTable', {
+            ots.GetRange(testTable, {
                 inclusiveStartPrimaryKey: {
                     pk: 'z'
                 },
@@ -320,7 +320,7 @@ describe('#apiCurd', function () {
         });
 
         it('GetRange INF_MIN->INF_MAX', function (done) {
-            ots.GetRange('sampleTable', {
+            ots.GetRange(testTable, {
                 inclusiveStartPrimaryKey: {
                     pk: ots.INF_MIN
                 },
@@ -341,7 +341,7 @@ describe('#apiCurd', function () {
             ots.BatchGetRow({
                 tables: [
                     {
-                        tableName: 'sampleTable',
+                        tableName: testTable,
                         maxVersions: 1,
                         primaryKey: [
                             {
@@ -367,7 +367,7 @@ describe('#apiCurd', function () {
             ots.BatchWriteRow({
                 tables: [
                     {
-                        tableName: 'sampleTable',
+                        tableName: testTable,
                         rows: [
                             {
                                 type: 'PUT',
@@ -434,7 +434,7 @@ describe('#apiCurd', function () {
 
     describe('#DeleteRow', function() {
         it('DeleteRow Row identify by pk with pkValue', function(done) {
-            ots.DeleteRow('sampleTable', {
+            ots.DeleteRow(testTable, {
                 pk: 'batchRow'
             }, null, function(err, result) {
                 should.ifError(err);
