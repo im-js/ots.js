@@ -51,6 +51,7 @@ delete_one_version = 0x03 (1byte)
 
 ## 帮助文档
 https://help.aliyun.com/knowledge_detail/38568.html?spm=5176.7838567.2.1.qCHWdJ
-
 crc 8 实现
 http://wuchenxu.com/2015/12/07/CRC8-calculate/
+javaSDk 性能优化测试
+https://yq.aliyun.com/articles/39695?spm=5176.100239.0.0.JYzeZ5
