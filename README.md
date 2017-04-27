@@ -5,6 +5,26 @@
 ## Engines
 `node >=6.0.0` for es6 support
 
+## Usage
+install
+```javascript
+npm install ots.js
+```
+init
+```javascript
+const OTS = require('ots.js');
+
+let ots = new OTS({
+    endPoint: process.env.otsEndPoint,
+    accessId: process.env.otsAccessId,
+    accessKey: process.env.otsAccessKey,
+    instanceName: process.env.otsInstanceName
+});
+
+ots.CreateTable(...);
+...
+```
+
 ## Feature
 * Base on `2015-12-31` API (latest API so far)
 * PlainBuffer Support

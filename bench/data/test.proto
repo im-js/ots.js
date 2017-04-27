@@ -1,7 +1,12 @@
+syntax = "proto3";
 package test;
 message PkMsg {
     required string pk = 1;
     required string zhcn = 2;
     required int64 number = 3;
     required bool bool = 4;
+}
+
+message Test1 {
+  repeated int32 a = 1;
 }

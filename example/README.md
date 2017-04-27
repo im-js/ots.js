@@ -9,25 +9,43 @@
 2. 用户通过 自身ID + 对方ID 拉取会话
 3. 用户拉取相关群会话
 
-统计需求：  
+状态统计：  
 1. 统计用户消息未读数、点击数等，并可更改阅读、点击状态。
 
-存储思路：
-1. 私聊的用户状态和数据都以 userId 为分区键
-2. 群聊的用户状态和数据都以 groupId 为分区键
-
-## 群消息存储
+## IM 存储结构设计
+**主键设计**  
 ```javascript
 pk: {
-    pk: md5(groupId) // 分区键
-    
+    pk: md5(conversationId) // 分区键
+    from: userId
+    to: groupId
+}
+```
+`conversationId` 生成规则  
+* 如果是群聊，则以 `md5(groupId)`，为 `conversationId`.
+* 如果是私聊，则以 `from` 与 `to` 做 `asc` 排序后的字符串拼接值，做 `md5`
+
+
+**属性列可选值**  
+```javascript
+attr: {
+    bool isRead // 已读状态
+    bool isClick // 点击状态
+    bytes payload // 序列化后的消息体，protobuf 序列化结果
+    string messageId // 消息ID，指向消息实体表
 }
 ```
 
-## 私聊消息存储
+
+
+## 站内消息存储结构设计
+和聊天最大的区别在于，会存在大量相同的消息体，所以增加一张消息实体表，用于存储实体消息  
 ```javascript
 pk: {
-    pk: md5(userId) // 分区键
+    md5(messageId)
+}
+attr: {
+    bytes payload // 序列化后的消息体，protobuf 序列化结果
 }
 ```
 
