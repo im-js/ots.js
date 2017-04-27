@@ -21,7 +21,12 @@ let ots = new OTS({
     instanceName: process.env.otsInstanceName
 });
 
-ots.CreateTable(...);
+// callback style
+ots.CreateTable(...args, callback);
+// without the callback parameter, it will return a promise object
+ots.CreateTable(...args)
+  .then(...);
+
 ...
 ```
 
@@ -29,7 +34,7 @@ ots.CreateTable(...);
 * Base on `2015-12-31` API (latest API so far)
 * PlainBuffer Support
 * AutoIncrement PrimaryKey Support
-* Connection Pool support ?
+* Promise Support (Base on bluebird)
 
 ## Test
 Before run test, please export following configuration to your env

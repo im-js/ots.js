@@ -77,6 +77,13 @@ describe('#apiTable', function () {
                 done();
             });
         });
+
+        it('describe table1 promise suooprt', function(done) {
+            ots.DescribeTable(testTable)
+                .then(function() {
+                    done();
+                });
+        });
     });
 
     describe('#DeleteTable', function() {
