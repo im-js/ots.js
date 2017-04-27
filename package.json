@@ -1,6 +1,6 @@
 {
   "name": "ots.js",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "ots.js: 阿里云开放表格存储服务 node-sdk",
   "main": "./lib/index.js",
   "scripts": {
