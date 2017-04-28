@@ -20,6 +20,10 @@ describe('#autoIncrementPK', function() {
                         name: 'pkIncr',
                         type: 'INTEGER',
                         option: 'AUTO_INCREMENT'
+                    },
+                    {
+                        name: 'other',
+                        type: 'STRING'
                     }
                 ]
             },
@@ -53,7 +57,8 @@ describe('#autoIncrementPK', function() {
         it('PutRow 1', function(done) {
             ots.PutRow(testTable, {
                 pk: 'autoIncr',
-                pkIncr: ots.AUTO_INCREMENT
+                pkIncr: ots.AUTO_INCREMENT,
+                other: 'other'
             }, null, null, function(err) {
                 should.ifError(err);
                 done();
@@ -63,7 +68,8 @@ describe('#autoIncrementPK', function() {
         it('PutRow 2', function(done) {
             ots.PutRow(testTable, {
                 pk: 'autoIncr',
-                pkIncr: ots.AUTO_INCREMENT
+                pkIncr: ots.AUTO_INCREMENT,
+                other: 'other'
             }, null, null, function(err) {
                 should.ifError(err);
                 done();
@@ -74,11 +80,13 @@ describe('#autoIncrementPK', function() {
             ots.GetRange(testTable, {
                 inclusiveStartPrimaryKey: {
                     pk: 'autoIncr',
-                    pkIncr: ots.INF_MIN
+                    pkIncr: ots.INF_MIN,
+                    other: ots.INF_MIN
                 },
                 exclusiveEndPrimaryKey: {
                     pk: 'autoIncr',
-                    pkIncr: ots.INF_MAX
+                    pkIncr: ots.INF_MAX,
+                    other: ots.INF_MAX
                 }
             }, function(err, result) {
                 should.ifError(err);

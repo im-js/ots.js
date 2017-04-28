@@ -16,6 +16,7 @@
                 "999999",
                 "--colors",
                 "${workspaceRoot}/test"
+                // ,"--grep=#autoIncrementPK"
                 // , "--grep=#PutRow"
                 // , "--grep=#apiTable"
                 // , "--grep=#GetRange"

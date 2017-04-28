@@ -34,7 +34,7 @@ ots.CreateTable(...args)
 * Base on `2015-12-31` API (latest API so far)
 * PlainBuffer Support
 * AutoIncrement PrimaryKey Support
-* Promise Support (Base on bluebird)
+* Promise Support
 
 ## Test
 Before run test, please export following configuration to your env
