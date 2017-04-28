@@ -1,6 +1,6 @@
 {
   "name": "ots.js",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "OTS(2015-12-31) API, PlainBuffer, pkAutoIncrement, Promise Support",
   "main": "./lib/index.js",
   "scripts": {
