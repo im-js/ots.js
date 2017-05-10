@@ -21,9 +21,9 @@ let ots = new OTS({
     instanceName: process.env.otsInstanceName,
     // optional options
     {
-      // default 10，connection poolSize
-      // use http.Agent, set keepAlie: true
-      poolSize: 20, 
+        // default 10，connection poolSize
+        // use http.Agent, set keepAlie: true
+        poolSize: 20
     }
 });
 
