@@ -41,6 +41,7 @@ ots.CreateTable(...args)
 * PlainBuffer Support
 * AutoIncrement PrimaryKey Support
 * Promise Support
+* Connetion Pool Support (Base on http1.1 keep-alive)
 
 ## Test
 Before run test, please export following configuration to your env
