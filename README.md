@@ -18,7 +18,13 @@ let ots = new OTS({
     endPoint: process.env.otsEndPoint,
     accessId: process.env.otsAccessId,
     accessKey: process.env.otsAccessKey,
-    instanceName: process.env.otsInstanceName
+    instanceName: process.env.otsInstanceName,
+    // optional options
+    {
+      // default 10，connection poolSize
+      // use http.Agent, set keepAlie: true
+      poolSize: 20, 
+    }
 });
 
 // callback style
