@@ -70,8 +70,13 @@ describe('#autoIncrementPK', function() {
                 pk: 'autoIncr',
                 pkIncr: ots.AUTO_INCREMENT,
                 other: 'other'
-            }, null, null, function(err) {
+            }, null, {
+                returnContent: {
+                    returnType: 'RT_PK'
+                }
+            }, function(err, result) {
                 should.ifError(err);
+                (result.rowDecode.pk.pkIncr).should.be.greaterThan(0);
                 done();
             });
         });
